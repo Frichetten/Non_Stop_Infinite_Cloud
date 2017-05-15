@@ -1,9 +1,9 @@
-from django.http import HttpResponse
+from django.shortcuts import render
 
 
 def home(request):
+    context = {}
     if request.user.is_authenticated():
-        context = {'data': 'You are logged in ' + request.user.username}
-    else:
-        context = {'data': 'You are not logged in'}
-    return HttpResponse("<h1>Home Page</h1>")
+        context = {'data': request.user.username}
+    return render(request, "home.html", context)
+
